@@ -3,7 +3,7 @@ Using Quickteller Payment SDK for Windows Phone 8
 
 Quickteller Payment SDK for Windows Phone 8 let you easily add payment capability into your Windows Phone 8 application. To get the SDK, visit the NuGet package URL: http://www.nuget.org/packages/Quickteller.Sdk.Wp8/. The steps below describe how you can go about integrating the SDK into your application.
 
-Registering you application on the Developer Console
+Registering your application on the Developer Console
 ----------------------------------------------------
 
 To begin integration with the Quickteller for Windows Phone 8 SDK, you have to register your application on the Developer Console. To do this, follow the steps below:
@@ -55,7 +55,7 @@ Using the SDK in your project
 
 	+ PhoneApplicationPage parent – This refers to the page hosting the SDK, the page where you want the SDK pop-up screen to show-up over.
 	+ string paymentCode – This refers to the payment code for the item which you want to pay for. To get a payment code, go to your Developer Console and register a new item. You’ll automatically get a payment code for the item.
-	+ long amount – This refers to the amount of money you need the user of your application to pay.
+	+ long amount – This refers to the amount of money you need the user of your application to pay in minor denomination (kobo).
 	+ string customerId – This refers to the id of the customer who I trying to perform the payment on your application. It is usually issued by you and it can be anything.
 	+ string clientId – This refers to the client ID you got from Developer Console for the particular application that you are developing.
 	+ string clientSecret – This refers to the secret key you got from Developer Console for the particular application that you are developing.
@@ -63,21 +63,21 @@ Using the SDK in your project
 
 3. Add handlers to the following events: OnPaymentCompleted and OnPaymentException, on the QuicktellerPayment object. Sample code is given thus:
 
-			quicktellerPayment.OnPaymentCompleted += (e) =>
+			quicktellerPayment.OnPaymentCompleted += (event) =>
             {
-                //where e is a type of PaymentCompletedEventArgs
+                //where event is a type of PaymentCompletedEventArgs
             };
-            quicktellerPayment.OnPaymentException += (e) =>
+            quicktellerPayment.OnPaymentException += (event) =>
             {
-                //where e is a type of PaymentExceptionEventArgs
+                //where event is a type of PaymentExceptionEventArgs
             };
 						
 4. Call the method DoPayment() method on the QuicktellerPayment object. Check the sample below:
 
 			var amount = 10000; //payment amount in kobo e.g. 10000=N100.00
 			var quicktellerPayment = new QuicktellerPayment(this, "10402", amount,  "0000000001", CLIENT_ID, CLIENT_SECRET);
-			quicktellerPayment.OnPaymentCompleted += (e) => {}
-			quicktellerPayment.OnPaymentException += (e) => {}
-			await quicktellerPayment.DoPaymentAsync();
+			quicktellerPayment.OnPaymentCompleted += (event) => {}
+			quicktellerPayment.OnPaymentException += (event) => {}
+			quicktellerPayment.PaymentAsync();
 			
 5. That is all. Enjoy!
